@@ -13,7 +13,7 @@ public class DailyAtInvocableJob : InvocableJob
 
     public override Task Invoke()
     {
-        _logger.Info($"Job {_jobDefinition.Name} was invoked.");
+        _logger.Info($"Job '{_jobDefinition.Name}' was invoked.");
         return Task.CompletedTask;
     }
 }

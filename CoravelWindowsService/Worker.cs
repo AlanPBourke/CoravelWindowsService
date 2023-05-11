@@ -41,11 +41,11 @@ public class Worker : BackgroundService
         {
             // Get the service configuration.
             serviceConfiguration = JsonConvert.DeserializeObject<ServiceConfiguration>(File.ReadAllText(configFile));
-            _logger.LogInformation($"read {serviceConfiguration!.EverySecondsJobDefinitions.Count}");
+
             // Schedule any enabled 'run every x seconds' jobs.
             foreach (EverySecondsJobDefinition j in serviceConfiguration!.EverySecondsJobDefinitions.Where(c => c.IsEnabled))
             {
-                _logger.LogInformation($"Adding job {j.Name} to run every {j.EverySeconds} seconds.");
+                _logger.LogInformation($"Adding job '{j.Name}' to run every {j.EverySeconds} seconds.");
 
                 _serviceScheduler.ScheduleWithParams<EverySecondsInvocableJob>(j)
                     .EverySeconds(j.EverySeconds);
@@ -54,7 +54,7 @@ public class Worker : BackgroundService
             // Schedule any enabled 'run daily at HH:MM' jobs.
             foreach (DailyAtJobDefinition j in serviceConfiguration!.DailyAtJobDefinitions.Where(c => c.IsEnabled))
             {
-                _logger.LogInformation($"Adding job {j.Name} to run daily at hour={j.AtHour} minute={j.AtMinute}.");
+                _logger.LogInformation($"Adding job '{j.Name}' to run daily at hour={j.AtHour} minute={j.AtMinute}.");
 
                 _serviceScheduler.ScheduleWithParams<DailyAtInvocableJob>(j)
                     .DailyAt(j.AtHour, j.AtMinute)

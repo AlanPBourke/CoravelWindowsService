@@ -4,7 +4,7 @@ namespace CoravelWindowsService.Models;
 
 public class ServiceConfiguration
 {
-    public List<EverySecondsJobDefinition> EverySecondJobDefinitions { get; set; } = new();
+    public List<EverySecondsJobDefinition> EverySecondsJobDefinitions { get; set; } = new();
     public List<DailyAtJobDefinition> DailyAtJobDefinitions { get; set; } = new();
 
 }

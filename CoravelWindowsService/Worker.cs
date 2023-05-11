@@ -17,12 +17,19 @@ public class Worker : BackgroundService
         _serviceScheduler = serviceScheduler;
     }
 
+    public Task StopAsync()
+    {
+        _logger.LogInformation("Service is stopping.");
+        return Task.CompletedTask;
+    }
+
+    // The business end of things.
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         _logger.LogInformation("Service is starting ...");
 
         string configFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "service-config.json");
-        ServiceConfiguration? serviceConfiguration;
+        ServiceConfiguration? serviceConfiguration = new();
 
         if (!File.Exists(configFile))
         {
@@ -34,9 +41,9 @@ public class Worker : BackgroundService
         {
             // Get the service configuration.
             serviceConfiguration = JsonConvert.DeserializeObject<ServiceConfiguration>(File.ReadAllText(configFile));
-
+            _logger.LogInformation($"read {serviceConfiguration!.EverySecondsJobDefinitions.Count}");
             // Schedule any enabled 'run every x seconds' jobs.
-            foreach (EverySecondsJobDefinition j in serviceConfiguration!.EverySecondJobDefinitions.Where(c => c.IsEnabled))
+            foreach (EverySecondsJobDefinition j in serviceConfiguration!.EverySecondsJobDefinitions.Where(c => c.IsEnabled))
             {
                 _logger.LogInformation($"Adding job {j.Name} to run every {j.EverySeconds} seconds.");
 
@@ -50,9 +57,9 @@ public class Worker : BackgroundService
                 _logger.LogInformation($"Adding job {j.Name} to run daily at hour={j.AtHour} minute={j.AtMinute}.");
 
                 _serviceScheduler.ScheduleWithParams<DailyAtInvocableJob>(j)
-                    .DailyAt(j.AtHour, j.AtMinute);
+                    .DailyAt(j.AtHour, j.AtMinute)
+                    .Zoned(TimeZoneInfo.Local);
             }
-
 
             _logger.LogInformation("Service is started.");
         }

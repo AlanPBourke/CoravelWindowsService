@@ -1,0 +1,28 @@
+{
+  "EverySecondsJobs": [
+    {
+      "Name": "Every x Seconds Job 1",
+      "EverySeconds": 15,
+      "IsEnabled": true
+    },
+    {
+      "Name": "Every x Seconds Job 2",
+      "EverySeconds": 20,
+      "IsEnabled": true
+    }
+  ],
+  "DailyAtJobs": [
+    {
+      "Name": "Daily At HH:SS Job 1",
+      "AtHour": 24,
+      "AtMinute": 30,
+      "IsEnabled": true
+    },
+    {
+      "Name": "Daily At HH:SS Job 2",
+      "AtHour": 13,
+      "AtMinute": 0,
+      "IsEnabled": true
+    }
+  ]
+}

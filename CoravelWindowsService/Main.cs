@@ -1,6 +1,6 @@
 using Coravel;
 using CoravelWindowsService;
-using CoravelWindowsService.JobDefinitions;
+using CoravelWindowsService.Invocables;
 using NLog.Extensions.Logging;
 
 IHost host = Host.CreateDefaultBuilder(args)
@@ -10,7 +10,7 @@ IHost host = Host.CreateDefaultBuilder(args)
     })
     .ConfigureServices(services =>
     {
-        services.AddHostedService<Worker>().
+        services.AddHostedService<CoravelService>().
         AddLogging(loggingBuilder =>
         {
             loggingBuilder.ClearProviders();
@@ -19,10 +19,10 @@ IHost host = Host.CreateDefaultBuilder(args)
         });
 
         services.AddScheduler();
-        services.AddTransient<EverySecondsJobDefinition>();
-        services.AddTransient<DailyAtJobDefinition>();
+        services.AddTransient<EverySecondsInvocableJob>();
+        services.AddTransient<DailyAtInvocableJob>();
 
     })
     .Build();
 
-host.Run();
+await host.RunAsync();

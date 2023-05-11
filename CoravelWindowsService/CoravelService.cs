@@ -6,12 +6,12 @@ using Newtonsoft.Json;
 
 namespace CoravelWindowsService;
 
-public class Worker : BackgroundService
+public class CoravelService : BackgroundService
 {
-    private readonly ILogger<Worker> _logger;
+    private readonly ILogger<CoravelService> _logger;
     private IScheduler _serviceScheduler { get; set; }
 
-    public Worker(ILogger<Worker> logger, IScheduler serviceScheduler)
+    public CoravelService(ILogger<CoravelService> logger, IScheduler serviceScheduler)
     {
         _logger = logger;
         _serviceScheduler = serviceScheduler;

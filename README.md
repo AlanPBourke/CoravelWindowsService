@@ -43,7 +43,7 @@ These correspond to the schedule methods of same names in Coravel. Obviously fur
 ```
 
 # Overview
-This solution is based on the 'Worker Service' project from the standard template supplied by Microsoft. You can read about that [here.](https://learn.microsoft.com/en-us/dotnet/core/extensions/windows-service)
+This solution is based on the 'Worker Service' template supplied by Microsoft. You can read about that [here.](https://learn.microsoft.com/en-us/dotnet/core/extensions/windows-service)
 
 This template will give you a project with a  **program.cs** entry point, which is renamed to [Main.cs](/CoravelWindowsService/Main.cs) in this solution and a **worker.cs** class containing a worker class derived from **BackgroundService**, renamed to [CoravelService.cs](/CoravelWindowsService/CoravelService.cs) in this colution. 
 
@@ -146,5 +146,14 @@ foreach (DailyAtJobDefinition j in serviceConfiguration!.DailyAtJobDefinitions.W
 }
 ```
 
+# Installing The Service
+For testing, the service can be installed and removed using an administrator command prompt. Change directory to the location of the built executable, then to install the service:
+
+```powershell
+sc install "Coravel Windows Service" binpath="\path\to\your\solution\bin\debug\net7.0
+```
+
+# Logging
+Logging is to dated file in the 'logs' subdirectory beneath the execut
 
 

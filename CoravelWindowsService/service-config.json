@@ -1,5 +1,5 @@
 {
-  "EverySecondsJobs": [
+  "EverySecondsJobDefinitions": [
     {
       "Name": "Every x Seconds Job 1",
       "EverySeconds": 15,
@@ -11,7 +11,7 @@
       "IsEnabled": true
     }
   ],
-  "DailyAtJobs": [
+  "DailyAtJobDefinitions": [
     {
       "Name": "Daily At HH:SS Job 1",
       "AtHour": 24,

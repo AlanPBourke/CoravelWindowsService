@@ -178,8 +178,9 @@ foreach (DailyAtJobDefinition j in serviceConfiguration!.DailyAtJobDefinitions.W
 Once built the service can be installed and removed using an administrator PowerShell prompt. Change directory to the location of the built executable, then to install the service:
 
 ```powershell
-sc install "Coravel Windows Service" binpath="\path\to\your\solution\bin\debug\net7.0\coravelwindowsservice.exe" 
+sc.exe create "Coravel Windows Service" binpath="\path\to\your\solution\bin\debug\net7.0\coravelwindowsservice.exe" 
 ```
+Note use of the executable name so that PowerShell doesn't take it as an alias for 'Set-Content'.
 
 Start it with:
 ```powershell

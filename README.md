@@ -184,7 +184,7 @@ Note use of the executable name so that PowerShell doesn't take it as an alias f
 
 Start it with:
 ```powershell
-sc start "Coravel Windows Service"
+sc.exe start "Coravel Windows Service"
 ```
 
 Check it's running with:
@@ -194,12 +194,12 @@ get-service "Coravel Windows Service"
 
 Stop it with:
 ```powershell
-sc stop "Coravel Windows Service"
+sc.exe stop "Coravel Windows Service"
 ```
 
 Delete it before rebuilding a new version with:
 ```powershell
-sc delete "Coravel Windows Service"
+sc.exe delete "Coravel Windows Service"
 ```
 
 # Logging
